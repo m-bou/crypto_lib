@@ -10,7 +10,7 @@ _OBJS= $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 OBJS= $(_OBJS:%.c=$(OBJ_DIR)%.o)
 
 CFLAGS = -I$(INC_DIR) -Wall #-O3
-CPPFLAGS = -lm
+CPPFLAGS = -lm -lgmp
 
 PRGS = $(OBJS) $(EXE) 
 
