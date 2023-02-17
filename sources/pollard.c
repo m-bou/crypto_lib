@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <gmp.h>
 
-#include "../headers/pollard.h"
+#include <pollard.h>
 
 /*
 *   Définition de f, la fonction de pas aléatoire
@@ -14,7 +14,7 @@ void facto_f(mpz_t x_i){
     mpz_add_ui(x_i, x_i, 1);
 }
 
-int facto_log(int n){
+long int facto_log(long int n){
     int h=0;
     while( (n>>= 1) ) h++;
     return h;

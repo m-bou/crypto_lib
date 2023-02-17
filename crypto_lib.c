@@ -1,6 +1,7 @@
 #include "headers/karatsuba.h"
 #include "headers/shanks.h"
 #include "headers/primality.h"
+#include "headers/pollard.h"
 
 // #include <stdbool.h>
 // #include <stdio.h>
@@ -55,41 +56,43 @@ void process_primality(){
     printf("Test de primalité de Miller-Rabin : %d\n",  primality_miller_rabin(N, SS_TEST_ROUND) );
 }
 
-// void process_factor(int argc, char** argv){
-//     mpz_t N, p, q;
-//     mpz_init(p);
-//     mpz_init(q);
+void process_factor(){
+    // n1= 52590354472497239257283147;
+    // n2= 52590354464570687296135717939981;
 
-//     // n1= 52590354472497239257283147;
-//     // n2= 52590354464570687296135717939981;
+    // mpz_t P, A;
 
-//     // mpz_t P, A;
+    // mpz_init_set_ui(P, 10);
+    // mpz_init_set_ui(A, 10);
+    // int n= 2041;
+    // mpz_init_set_ui(N, 2041);
 
-//     // mpz_init_set_ui(P, 10);
-//     // mpz_init_set_ui(A, 10);
-//     // int n= 2041;
-//     // mpz_init_set_ui(N, 2041);
+    char N_str[50];
+    mpz_t N, p, q;
+    mpz_init(p);
+    mpz_init(q);
 
-//     if(argc == 2)   mpz_init_set_str(N, argv[1], 10);
-//     else{
-//         printf("usage : pollard_facto N\n");
-//         return 1;
-//     }
+    printf("Choisir N : ");
+    if( !scanf(" %49[0-9 ]", N_str) )
+        return;
 
-//     if( mpz_probab_prime_p(N, 24) ){
-//         gmp_printf("%Zd est premier.\n", N);
-//         return;
-//     }
+    printf("Good\n");
 
-//     facto_pollard(p, N);
-//     mpz_cdiv_q(q, N, p);
+    mpz_init_set_str(N, N_str, 10);
 
-//     gmp_printf("Rho de pollard sur %Zd\n", N);
-//     gmp_printf("p: %Zd\n", p);
-//     gmp_printf("q: %Zd\n", q);
+    if( mpz_probab_prime_p(N, 24) ){
+        gmp_printf("%Zd est premier.\n", N);
+        return;
+    }
 
-//     return 0;
-// }
+    facto_pollard(p, N);
+    mpz_cdiv_q(q, N, p);
+
+    gmp_printf("Factorisation Rho-Pollard sur %Zd = p * q avec\n", N);
+    gmp_printf("p: %Zd\n", p);
+    gmp_printf("q: %Zd\n", q);
+
+}
 
 int main(int argc, char** argv){
     int c;
@@ -101,6 +104,7 @@ int main(int argc, char** argv){
         printf("* 1 - Multiplication karatsuba \t\t*\n");
         printf("* 2 - Racine Shanks-Tonelli    \t\t*\n");
         printf("* 3 - Test de Primalité        \t\t*\n");
+        printf("* 4 - Factorisation Rho-Pollard\t\t*\n");
         printf("\t\t\t\t\t*\n");
         printf("*****************************************\n");
 
@@ -111,6 +115,7 @@ int main(int argc, char** argv){
             case 1: process_karatsuba(); break;
             case 2: process_shanks(); break;
             case 3: process_primality(); break;
+            case 4: process_factor(); break;
             case 0:default: printf("Au revoir !\n"); return 0;
 
         }
