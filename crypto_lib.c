@@ -2,6 +2,7 @@
 #include "headers/shanks.h"
 #include "headers/primality.h"
 #include "headers/pollard.h"
+#include "headers/exam.h"
 
 // #include <stdbool.h>
 // #include <stdio.h>
@@ -108,6 +109,7 @@ int main(int argc, char** argv){
         printf("* 2 - Root Shanks-Tonelli    \t\t*\n");
         printf("* 3 - Primality Test        \t\t*\n");
         printf("* 4 - Factorization Rho-Pollard\t\t*\n");
+        printf("* 5 - Examen\t\t*\n");
         printf("* 0 - Exit \t\t\t\t*\n");
         printf("*\t\t\t\t\t*\n");
         printf("*****************************************\n");
@@ -122,6 +124,7 @@ int main(int argc, char** argv){
             case 2: process_shanks(); break;
             case 3: process_primality(); break;
             case 4: process_factor(); break;
+            case 5: exam(); break;
             case 0:default: printf("Au revoir !\n"); return 0;
 
         }
